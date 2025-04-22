@@ -1,0 +1,3 @@
+SELECT DB_NAME();
+
+SELECT * FROM staff;
