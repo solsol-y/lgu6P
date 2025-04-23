@@ -7,7 +7,7 @@ import pymssql
 conn = pymssql.connect(
     server='127.0.0.1',
     port=1433,
-    user='evan-tester2',
+    user='ysolsol-tester',
     password='1234',
     database='BikeStores',
     as_dict=True
