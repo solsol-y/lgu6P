@@ -86,3 +86,91 @@ SELECT product_id, REPLACE(product_id, 'F','A') AS 결과
 FROM apparel_product_info;
 
 --ISNULL 중요함
+-- WHERE절과 함께 쓰일 때 자주 활용되는 방법
+-- 데이터상에 결측치가 존재 할 때, 꼭 필요한 함수
+SELECT * FROM apparel_product_info;
+
+--- 숫자함수 (p.61) : ABS, CEILING, FLOOR, ROUND< POWER, SQRT
+-- 다른 DBMS, MYSQL, Oracle,
+SELECT ROUND(CAST (748.58 AS DECIMAL (6,2)), -3);
+
+-- SIGN : 양수, 음수, 0 구분
+SELECT SIGN(-125), SIGN(0), SIGN(564);
+
+-- CEILING : 특정 숫자를 올림처리
+SELECT * FROM sales;
+SELECT
+	sales_amount_usd
+	, CEILING(sales_amount_usd) AS 결과
+FROM sales;
+
+-- 날짜함수 : 공식문서 무조건 참조
+-- GETDATE : 공식문서
+-- DATEADD : 공식문서
+-- DATEDIFF(p.255) : 재구매율 구할 때 꼭 쓴다.
+SELECT 
+	order_date
+	, DATEADD(YEAR, -1, order_date) AS 결과1
+	, DATEADD(YEAR, +2, order_date) AS 결과2
+	, DATEADD(DAY, +40, order_date) AS 결과2
+FROM sales;
+
+-- DATEDIFF (p.72)
+SELECT
+	order_date
+	, DATEDIFF(MONTH, order_date, '2025-04-22') 함수적용결과1
+	, DATEDIFF(DAY, order_date, '2025-04-22') 함수적용결과1 
+FROM sales
+;
+
+SELECT DATEDIFF(DAY, '1997-02-26', '2025-04-22');
+
+-- 순위함수 (p.74), 윈도우 함수(mysql 때 자세히 다룰 예정) ==> 살짝 난해함.
+-- RANK : 
+SELECT * FROM student_math_score;
+SELECT
+	학생
+	, 수학점수
+	, RANK() OVER(ORDER BY 수학점수 DESC) AS rank등수
+	, DENSE_RANK() OVER(ORDER BY 수학점수 DESC) AS dense_rank등수
+	, ROW_NUMBER() OVER(ORDER BY 수학점수 DESC) AS row_number등수
+FROM student_math_score
+;
+
+-- PARTITION BY
+-- OVER(ORDER BY) : 전체 중에서 몇 등
+-- OVER(PARTITION BY class ORDER BY) : 반 별로 나눴을 때 반에서 몇 등?)
+SELECT
+	학생
+	, Class
+	, 수학점수
+	, DENSE_RANK() OVER(ORDER BY 수학점수 DESC) AS 전교등수
+	, DENSE_RANK() OVER(PARTITION BY Class ORDER BY 수학점수 DESC) AS 반등수
+FROM student_math_score
+;
+
+-- CASE문(p.79) : 조건문 (IF문 대신 사용)
+-- SELECT문 작성 시, 조회용
+-- PL/SQL 쓸 경우에는, IF문 사용 가능
+
+-- 값이 0보다 작다면 '환불거래', 0보다 크다면 '정상거래'로 분류
+-- 연습하는 방법
+1)
+SELECT * FROM sales;
+2)
+SELECT 
+	sales_amount
+FROM sales;
+3)
+SELECT
+	sales_amount
+	, CASE WHEN sales_amount < 0 THEN '환불거래'
+		   WHEN sales_amount > 0 THEN '정상거래'
+	END AS 적용결과
+FROM sales;
+
+-- p.83 실습하면서 오늘 배운 내용 간단 정리
+
+
+
+--- 집계함수
