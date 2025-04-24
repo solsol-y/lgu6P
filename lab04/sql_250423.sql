@@ -1,7 +1,7 @@
 SELECT * FROM production.brands;
 
 -- 교재, WHERE 절
--- 조건과 일히하는 데이터 조회(필터링)
+-- 조건과 일치하는 데이터 조회(필터링)
 -- pandas, ilo, loc, 비교연산자 등 같이  상기
 
 -- p.94
@@ -34,7 +34,7 @@ SELECT * FROM customer WHERE customer_id = 'Z002';
 -- p. 100, BTWEEN 연산자,자수 쓰임
 --- 30000에 40000상의 조건을 만족하는 행 출력
 SELECT *
-FROM slaes
+FROM sales
 WHERE sales_amount BETWEEN 35000 AND 40000;
 
 SELECT * FROM customer
@@ -142,7 +142,7 @@ SELECT * FROM sales;
 -- 일별로 판매된 수량과 금액
 SELECT SUM(수량) AS 수량 FROM sales;
 
--- 문법 주의
+-- 문법 주의(p.124)
 SELECT 날짜, SUM(수량) AS 수량 FROM sales;
 
 SELECT 날짜, SUM(수량) AS 수량 
@@ -169,3 +169,14 @@ SELECT 날짜, 제품명, SUM(수량) AS 수량, SUM(금액)
 FROM sales
 GROUP BY 날짜, 제품명
 ;
+
+-- p.130
+-- 수행한 코드, 이미 중복값이 존재한 상태
+-- 주문날짜, 2023-03-01, 2023-03-05
+-- 월별 총매출액
+/*
+SELECT MONTH(order_date), sum(매출액)
+FROM 테이블
+GROUP BY MONTH(order_date)
+;
+/*
