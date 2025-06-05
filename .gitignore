@@ -181,4 +181,5 @@ cython_debug/
 
 
 lab06/lgu6P_ml_dl/CH12/celeba/
-lab06/lgu6P_ml_dl/CH12/data/cifar-10-batches-py/
+lab06/lgu6P_ml_dl/CH12/data/
+lab06/lgu6P_ml_dl/CH12/cat_dog_images.tar.gz
