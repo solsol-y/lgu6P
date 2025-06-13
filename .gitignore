@@ -183,3 +183,6 @@ cython_debug/
 lab06/lgu6P_ml_dl/CH12/celeba/
 lab06/lgu6P_ml_dl/CH12/data/
 lab06/lgu6P_ml_dl/CH12/cat_dog_images.tar.gz
+lab06/lgu6P_ml_dl/CH12/kaggle_cat_dog/val_data
+lab06/lgu6P_ml_dl/CH12/kaggle_cat_dog/train
+lab06/lgu6P_ml_dl/CH12/kaggle_cat_dog/train_data
